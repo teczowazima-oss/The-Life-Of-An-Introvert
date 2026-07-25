@@ -5,7 +5,79 @@ hunger = 0
 health = 100
 day = 1
 monstercare = 100
+saves = [None] * 11
 # purple is enasni, green is lamron, yellow is bmud
+def slrmenu():
+    print("You somehow had an ending. Now, you get the chance to restart.")
+    slr = input("{Restart}\t{Load}\t{Exit}\n")
+    if slr == "Restart":
+        restart()
+    elif slr == "Load":
+        load()
+    elif slr == "Exit":
+        print("Very well.\nENDING: DIDN'T TAKE THE PRESSURE")
+        exit()
+    else:
+        print("I literally gave you easier choices and you're still messing around. I made a save menu for you and you don't care? Fine! I won't stop the program! Sit here in uncomfortable silence.")
+def save():
+    global purple
+    global green
+    global yellow
+    global hunger
+    global health
+    global day
+    global monstercare
+    global saves
+    print("\n")
+    saves[day] = [
+        green,
+        purple,
+        yellow,
+        monstercare,
+        health,
+        hunger,
+        day
+    ]
+
+def load():
+    global purple
+    global green
+    global yellow
+    global hunger
+    global health
+    global day
+    global monstercare
+    print("Type days 1-10 or ill be mad.")
+    day = int(input("What day are you loading?\n"))
+    
+    if day < 1 or day > 10:
+        print("That is not what i told you.")
+        return
+    elif saves[day] is None:
+        print("You didn't play that day yet.")
+        return
+    else:
+        green, purple, yellow, monstercare, health, hunger, day = saves[day]
+        print("Loaded.")
+def restart():
+    global purple
+    global green
+    global yellow
+    global hunger
+    global health
+    global day
+    global monstercare
+    global saves
+    saves = [None] * 11
+    print("You restarted.")
+    day = 1
+    purple = 0
+    green = 0
+    yellow = 0
+    hunger = 0
+    health = 100
+    monstercare = 100
+
 def day6if3():
     global purple
     global green
@@ -59,7 +131,7 @@ def day5():
         print("The monsters want you gone or dead.")
     elif monstercare == 2:
         print("The monsters want you here forever. You're too important to let out! You are funny, cool, and their bestie! The outside is too dangerous.")
-    elif monstercare == 3 or (green > 4 and purple < 7):
+    elif monstercare == 3 or (green > 4 and purple <= 4):
         print("'You should go... We want you to feel good.' The monsters look genuinely concerned. It's the first time they spoke like a human. I think they're trying to be as human as they can for you. Do you leave?")
         staygo3 = input("{stay}\t{go}\n")
         if staygo3 == "stay":
@@ -79,7 +151,7 @@ def day5():
             green += 1
             print("'th@at 1Iis a R3elief.' The monsters calmed down a little, but were still a bit worried about you. And scared of you...")
         elif ihnifana1 == "SQUIRREL":
-            print("the hell you want from me? im not gonna rap if thats what you want. what do you want from the dev? can a person even be ginger without comments like- ah you're here for the rabies.\nok. i uh may have been carried away. heres your rabid ending i guess\nENDING: RABIES")
+            print("the hell you want from me? im not gonna rap if that's what you want. what do you want from the dev? can a person even be ginger without comments like- ah you're here for the rabies.\nok. i uh may have been carried away. heres your rabid ending i guess\nENDING: RABIES")
         else:
             print("when you pick a route just stay on it geez. maybe you did an idiot speedrun huh")
     else:
@@ -161,6 +233,7 @@ def day4():
                     monstercare = 4
                     print("They encourage you to go to a human therapist. But... You don't want to yet.")
                     day += 1
+                    save()
     else:
         print("How the hell did you get here... The monsters are neutral with you. They let you go or stay.")
         staygo1 = input("{Stay}\t{Go}\n")
@@ -175,9 +248,15 @@ def day4():
                     print("Your anxiety gets bigger and bigger, followed by an existential crisis. Are you human? Monster? Dead? Fake?\nHard to tell. They start noticing. They are worried.")
                     day += 1
                     monstercare = 3
+                    save()
+                elif staygo2 == "Go":
+                    print("a placeholder")
+                    day += 1
+                    green += 2
+                    save()
             else:
                 print("You like living like this. You feel at home. You slowly see your body becoming like the monsters'. It's good. After months, you are officialy one of them! You realise your family isn't as bad as humanity says.\nThey don't kill to kill. That's their way to eat. Being scary, psychotic... That's a habit around humans. Humans are actually worse than them. Not just from your perspective.\nYour family isn't toxic. They tolerate every gender, every hobby, don't have the internet.\nENDING: ONE OF THEM (sane)")
-                exit()
+                slrmenu()
 
 def day3():
     global purple
@@ -192,7 +271,7 @@ def day3():
     if choice4 == "the wardrobe":
         print("You opened the wardrobe and an anime girl knocked you out. You didn't wake up.")
         print("ENDING: WAIFU'D")
-        exit()
+        slrmenu()
     elif choice4 == "under the bed":
         print("Ah. You forgot to feed the monsters, and they took a snack themselves. You deducted the person is dead. You may be next.")
         print("Will you feed the monsters?")
@@ -205,18 +284,20 @@ def day3():
             if feedingmon1 == "normal food":
                 print("The monsters didn't like it and they ate you.")
                 print("ENDING: EATEN BY MONSTERS b")
-                exit()
+                slrmenu()
             elif feedingmon1 == "a human":
                 print("You fed them someone and they're happy.")
                 day += 1
                 if purple > 4:
                     print("You ate a little of that person too. The aftertaste was interesting. You talked with the monsters for a while and then went to their party. It lasted the whole night.")
+                    save()
                 else:
                     print("You hid under the blanket for a long time.")
+                    save()
         elif feedmonsters1 == "no":
             print("They ate you.")
             print("ENDING: MONSTER EATEN a")
-            exit()
+            slrmenu()
     elif choice4 == "HELL NAH":
         print("You ran away from home. You went...")
         green += 2
@@ -226,23 +307,28 @@ def day3():
             hunger -= 20
             health -= 15
             day += 1
+            save()
         elif runaway1 == "to the police station":
             print("You told the cops you smelled blood in your room. They reluctantly went to check it and they found nothing.\nThe monsters will probably be upset...")
             day += 1
             green += 4
+            save()
         elif runaway1 == "to a friend's house":
             print("Very funny. Maybe the imaginary one. You lay on the street.")
             yellow += 2
             day += 1
+            save()
             hunger += 10
             if yellow > 2:
                 print("You could always sleep in a store like in those cool videos...")
                 choice5 = input("{yes}\t{no}\n")
                 if choice5 == "yes":
                     print("You managed to hide in an IKEA. The employees saw you but decided your life is sad enough.")
+                    save()
                 elif choice5 == "no":
                     print("You sleep on the street. For 2 minutes. You go there anyway.")
                     print("You managed to hide in an IKEA. The employees saw you but decided your life is sad enough.")
+                    save()
 
         elif runaway1 == "screw it.":
             print("You become homeless but your begging is very ineffective. You starve.")
@@ -271,12 +357,15 @@ def day2():
             if choice3 == "the apples":
                 hunger -= 4
                 print("It was good, but you're still a little hungry.")
+                save()
             elif choice3 == "ramen":
                 hunger -= 8
                 print("That hit the spot.")
+                save()
             elif choice3 == "the bun":
                 hunger -= 5
                 print("Tasted decent.")
+                save()
     elif choice2 == "starve":
         print("You are starving.\n")
         starving1 = input("{eat}\t{don't eat}\n")
@@ -284,6 +373,7 @@ def day2():
             print("You ate something. You spent the whole day lying in your bed, exhausted.")
             day += 1
             purple += 1
+            save()
         elif starving1 == "don't eat":
             print("You starved.")
             print("ENDING: STARVED")
@@ -299,17 +389,19 @@ def day2():
         if stealing1 == "cat":
             print("You stole a cat's food bowl. It striked you with lightning. Never mess with cats.")
             print("ENDING: CAT STRIKED")
-            #you dare to mess with God?
+            #you dare to mess with God? no restart 4 u
             yellow += 100000000000000000000000000000000000000000
             exit()
         elif stealing1 == "neighbour":
             print("The neighbour caught you. You went to prison.")
             print("ENDING: PRISON a")
             exit()
+            slrmenu()
         elif stealing1 == "grandma":
             print("You are evil. Grandma fed you anyway and insisted you stay for tea.")
             day += 1
             hunger -= 2
+            save()
         else:
             print("pfft. you shouldve stolen")
             exit()
@@ -336,12 +428,14 @@ def start():
         yellow += 1
         day += 1
         hunger -= 3
+        save()
     elif choice == "the note":
         print("You ate the note")
         print("It tasted like a freezer. The paper was ok though.\nYou spent the whole day trying to eat it.")
         purple += 1
         hunger -= 1
         day += 1
+        save()
     elif choice == "none":
         print("You decide it's best if you don't eat.")
         print("You're hungry.")
@@ -352,10 +446,12 @@ def start():
             print("The day passed normally.")
             day += 1
             hunger -= 2
+            save()
         elif greenhunger1 == "wait until tomorrow":
             print("You didn't eat anything and decided to buy food tomorrow. You lie on the couch the whole day.")
             day += 1
             hunger += 5
+            save()
         else:
             print("no")
             exit()
@@ -364,6 +460,7 @@ def start():
         day += 1
         purple += 4
         hunger -= 1
+        save()
     elif choice == "qwertyuiop":
         print("congrats a skip. you ate your keyboard and the shift button fell off thats why im typing in lowercase. h3v n0vv j can7 sL3ak! 0kav jm g3771ng vs3d 2 7h1s. 1dj07!\n3NDJNG: C0M3 0N! DVMBASS")
         day = 5
@@ -372,13 +469,18 @@ def start():
         print("either youre trolling or stupid")
         exit()
 
-start()
-if day == 2:
-    day2()
-if day == 3:
-    day3()
-if day == 4:
-    day4()
-if day == 5:
-    day5()
+while True:
+    if day == 1:
+        start()
+    elif day == 2:
+        day2()
+    elif day == 3:
+        day3()
+    elif day == 4:
+        day4()
+    elif day == 5:
+        day5()
+    else:
+        print("not yet")
+        break
 #this is illegal. i mean you.
