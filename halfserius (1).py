@@ -84,21 +84,40 @@ def day6if1():
 def day6if2():
     global purple, green, yellow, hunger, health, day, monstercare, saves
     print("The monsters are obsessed!")
+def day6ify():
+    print("You wake up after an unidentified amount of time. The basement is dimly lit. The cookies had a weird aftertaste and you fell asleep almost instantly after eating them.\nYou decide it's just the sugar teen love thing. The narrator can't take your idiotism and cuts in: Are you such a moron that you don't know what sugar... ugh.\nYou don't really know what that was about. Anyway, you keep on eating the cookies.\nYour brain the size of a peanut that's basically polished to perfection manages to get the 1.5 braincells working and gives you an idea.")
+    dumbass1 = input("{drool}\t{quote brainrots}\t{try to run}\t{think}\n")
+    if dumbass1 == "drool":
+        print("You drool over the chains and your saliva makes them dissolve. Probably from every sleeping pill that's in your body right now. Or the teen love sugar thing. You don't have enough brainpower to care.\nYou see a weird looking chair with a red sign and some white letters on it. It's probably nothing.")
+        drooled1 = input("{sit}\t{red bad}\n")
+        if drooled1 == "sit":
+            print("You sit on the chair and push a button. You feel tickles and your 1 braincell gets electrocuted, leaving you with 0.5.")
+        elif drooled1 == "red bad":
+            print("Apparently one thing in your mind stayed intact - fear of red. That decision unlocks the next level of evolution and you can read again. Mostly. You see a danger sign.\nIt was a good choice.")
+    elif dumbass1 == "quote brainrots":
+        for i in range(100):
+            print("burn in hell.")
+        print("You have personally insulted me, the developer, and every being in this multiverse. You, filthy creature, you do not deserve having an electronic device anymore. Burn in hell.")
+        print("You do not have enough dignity to witness the load reset exit menu. You little ipad kid timmy, your mom should never give you her phone. You're not funny, nor cool. I could fry your stinky iphone right now.\nENDING: YOU DO NOT DESERVE TO ROAM THIS WORLD")
+        exit()
 def day5():
     global purple, green, yellow, hunger, health, day, monstercare, saves
     print("Day 5... Congrats on getting through yesterday. I'm guessing it's not your first attempt. It got pretty dark, didn't it? Well. Since no one wanted more days, I'll make them.")
     # This one will make you feel weird because it will be super goofy! So you will feel like something bad's gonna come!") - originally a print, but decided better not to
     print("You are at your house. Or something similiar to it. Anyway, you're in a place very similiar to your house.")
-    if yellow >= 6:
+    if yellow >= 7:
         print("The monsters are a little concerned because of all the questionable choices you made. They're wondering if you should be sent to get supervision.\nThe monsters speak to you like to a kid. They are getting more and more worried, since you tried to drink gasoline you found lying around. They try to calm you down.")
         ihnifana1 = input("{GRR}\t{im not that dumb}\t{SQUIRREL}\n")
         # i have no idea for a name anymore. ihnifana1 is staying
         if ihnifana1 == "GRR":
             yellow += 3
             print("YoU snArLeD aT thEm! They decide it's best to send you back to grandma. She welcomed you and had to restrain you in the basement, but still fed you cookies and tea.")
+            day6ify()
         elif ihnifana1 == "im not that dumb":
             green += 1
+            yellow -= 1
             print("'th@at 1Iis a R3elief.' The monsters calmed down a little, but were still a bit worried about you. And scared of you...\nThey still kick you out. There's no way they are gonna let you stay.")
+            day6ify()
         elif ihnifana1 == "SQUIRREL":
             print("the hell you want from me? im not gonna rap if that's what you want. what do you want from the dev? can a person even be ginger without comments like- ah you're here for the rabies.\nok. i uh may have been carried away. heres your rabid ending i guess\nENDING: RABIES")
             slrmenu()
