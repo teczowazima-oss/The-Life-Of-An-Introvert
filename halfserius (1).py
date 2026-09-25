@@ -1,3 +1,4 @@
+import time
 purple = 0
 green = 0
 yellow = 0
@@ -5,6 +6,8 @@ hunger = 0
 health = 100
 day = 1
 monstercare = 100
+satonchair = False
+atefromcat = False
 saves = [None] * 11
 # purple is enasni, green is lamron, yellow is bmud
 def slrmenu():
@@ -66,7 +69,17 @@ def day6if3():
         print("You went to your drug cabinet. As you opened it, you saw everything was expired. You have two options... Go to the pharmacy or try these.")
         pharmacy = input("{pharmacy}\t{try these}\n")
         if pharmacy == "pharmacy":
-            print("placeholder")
+            print("That sounds scary. You really don't wanna do that... But you go against yourself and do it anyway. Every person you pass by looks at you weird.\nMaybe because you're wearing rags.")
+            buyrun1 = input("{go back}\t{buy anyway}\n")
+            if buyrun1 == "go back":
+                print("You try to run back but a car runs you over. Then another. And another. Someone throws you some 40% vodka. You die of alcohol overdose(?).\nENDING: OVERDRUNK")
+                slrmenu()
+            elif buyrun1 == "buy anyway":
+                print("You push through it and buy some cheap meds. You go back home and you take them. It turns out it was poison.")
+                time.sleep(5)
+                print("\nYou don't die because you're used to eating weird things anyway.\nYou did have salmonnella'd ice cream and an ice slab with paper in your fridge as your only food source, what did you expect?")
+                
+                
     elif headache == "sleep it off":
         print("You can't sleep. It gets worse because you think even more.")
         return
@@ -95,17 +108,17 @@ def day6ify():
         elif drooled1 == "red bad":
             print("Apparently one thing in your mind stayed intact - fear of red. That decision unlocks the next level of evolution and you can read again. Mostly. You see a danger sign.\nIt was a good choice.")
     elif dumbass1 == "quote brainrots":
-        for i in range(100):
+        for i in range(500):
             print("burn in hell.")
         print("You have personally insulted me, the developer, and every being in this multiverse. You, filthy creature, you do not deserve having an electronic device anymore. Burn in hell.")
-        print("You do not have enough dignity to witness the load reset exit menu. You little ipad kid timmy, your mom should never give you her phone. You're not funny, nor cool. I could fry your stinky iphone right now.\nENDING: YOU DO NOT DESERVE TO ROAM THIS WORLD")
+        print("You do not have enough dignity to witness the load reset exit menu. You little ipad kid timmy, your mommy should never give you her phone. You're not funny, nor cool. I could fry your stinky iphone right now.\nENDING: YOU DO NOT DESERVE TO ROAM THIS WORLD")
         exit()
 def day5():
     global purple, green, yellow, hunger, health, day, monstercare, saves
     print("Day 5... Congrats on getting through yesterday. I'm guessing it's not your first attempt. It got pretty dark, didn't it? Well. Since no one wanted more days, I'll make them.")
     # This one will make you feel weird because it will be super goofy! So you will feel like something bad's gonna come!") - originally a print, but decided better not to
     print("You are at your house. Or something similiar to it. Anyway, you're in a place very similiar to your house.")
-    if yellow >= 7:
+    if yellow >= 6:
         print("The monsters are a little concerned because of all the questionable choices you made. They're wondering if you should be sent to get supervision.\nThe monsters speak to you like to a kid. They are getting more and more worried, since you tried to drink gasoline you found lying around. They try to calm you down.")
         ihnifana1 = input("{GRR}\t{im not that dumb}\t{SQUIRREL}\n")
         # i have no idea for a name anymore. ihnifana1 is staying
@@ -128,6 +141,10 @@ def day5():
         print("Your friends care. They will let you go, but won't force you to do anything. You're one of them.")
         day += 1
         save()
+    elif monstercare == 2:
+        print("The monsters want you here forever. You're too important to let out! You are funny, cool, and their bestie! The outside is too dangerous.")
+        day6if2()
+        day += 1
     elif monstercare == 3 or (green > 4 and purple <= 4):
         print("'You should go... We want you to feel good.' The monsters look genuinely concerned. It's the first time they spoke like a human. I think they're trying to be as human as they can for you. Do you leave?")
         staygo3 = input("{stay}\t{go}\n")
@@ -135,13 +152,12 @@ def day5():
             print("Not an option. You get forced out of the paralell universe into your house and you realise your fridge is empty again.")
             print("You noticed the apples you buy often go missing. It's weird. Anyway, you just T-Pose the whole day since i have no idea for this line.")
             day6if3()
+            day += 1
             save()
     elif monstercare == 1:
         print("The monsters are neutral. They will let you choose whether you go or stay.")
     elif monstercare == 0:
         print("The monsters want you gone or dead.")
-    elif monstercare == 2:
-        print("The monsters want you here forever. You're too important to let out! You are funny, cool, and their bestie! The outside is too dangerous.")
     else:
         print("CONGRATULATIONS! YOU GOT THE IMPOSSIBLE BUG ROUTE! for getting here i will reward you with a q&a. oops you clipped into the backrooms bye ending seeker. also youre here because you made the most plain character ever\n3ND1NG: B@CKR00MS")
         restart()
@@ -195,7 +211,7 @@ def day4():
         mtu1 = input("{PANIC}\t{society is worse}\n")
         if mtu1 == "PANIC":
             print("Party pooper. The monsters felt decieved and used you as a prop in their escape room. So tragic, you can't warn anyone anymore...\nENDING: PROPPED")
-            exit()
+            slrmenu()
         elif mtu1 == "society is worse":
             print("You decided being here with the monsters is better than living like a normal person.\nDays pass and you fall deeper into insanity. The monsters start getting concerned and let you out to seek help.\nThere you are again, on the street, because your besties kicked you out. How could they?! You did EVERYTHING to be friends, you were cool, you were fun, you killed too... AND NOW THEY KICK YOU OUT?!\n")
             choice8 = input("{Be upset}\t{Understand}\n")
@@ -311,7 +327,7 @@ def day3():
         elif runaway1 == "screw it.":
             print("You become homeless but your begging is very ineffective. You starve.")
             print("ENDING: HOMELESS                                                                                                                                                                                                                                                                                                                                                                                ")
-            exit()
+            slrmenu()
         
 
 def day2():
@@ -451,4 +467,7 @@ while True:
         break
 # easier to copy: slrmenu()
 #save()
-#this is illegal. i mean you.
+#This is illegal. I mean you.
+
+# use in yellow route: You got away with your dumbness long enough, player. No trolling anymore. The Council of Cats decided that you should be killed because of the thought of stealing from them popped into your mind. The ice cream in your digestive system mutated into a slimy monster.
+#Grandma came in full netherite armour because you stole too many cookies. The IKEA employees came with IKEA weapons. You're f*.
