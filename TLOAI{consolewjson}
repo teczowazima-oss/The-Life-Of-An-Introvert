@@ -406,8 +406,9 @@ def day2():
             print("You stole a cat's food bowl. It striked you with lightning. Never mess with cats.")
             print("ENDING: CAT STRIKED")
             #you dare to mess with God? no restart 4 u... or maybe?
-            yellow += 100000000000000000000000000000000000000000
             atefromcat = True
+            save()
+            yellow += 100000000000000000000000000000000000000000
             exit()
         elif stealing1 == "neighbour":
             print("The neighbour caught you. You went to prison.")
