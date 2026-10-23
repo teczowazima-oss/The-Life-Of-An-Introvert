@@ -1,4 +1,5 @@
 import time
+import json
 purple = 0
 green = 0
 yellow = 0
@@ -22,37 +23,63 @@ def slrmenu():
         exit()
     else:
         print("I literally gave you easier choices and you're still messing around. I made a save menu for you and you don't care? Fine! I won't stop the program! Sit here in uncomfortable silence.")
+
 def save():
     global purple, green, yellow, hunger, health, day, monstercare, saves
-    print("\n")
+
     saves[day] = [
-        green,
-        purple,
-        yellow,
-        monstercare,
-        health,
-        hunger,
-        day
+        green, purple, yellow,
+        monstercare, health, hunger, day
     ]
 
+    with open("save.json", "w") as file:
+        json.dump({
+            "purple": purple,
+            "green": green,
+            "yellow": yellow,
+            "hunger": hunger,
+            "health": health,
+            "day": day,
+            "monstercare": monstercare,
+            "satonchair": satonchair,
+            "atefromcat": atefromcat,
+            "saves": saves
+        }, file, indent=4)
+
+
+
 def load():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health
+    global day, monstercare, satonchair, atefromcat, saves
+
+    try:
+        with open("save.json", "r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        print("No save file exists yet.")
+        return
+    saves = data["saves"]
     print("Type days 2-10 or I'll be mad.")
-    day = int(input("What day are you loading?\n"))
-    
-    if day < 2 or day > 10:
+    chosen_day = int(input("What day are you loading?\n"))
+    if chosen_day < 2 or chosen_day > 10:
         print("That is not what I told you.")
         return
-    elif saves[day] is None:
+    if saves[chosen_day] is None:
         print("You didn't play that day yet.")
-        restart()
-    else:
-        green, purple, yellow, monstercare, health, hunger, day = saves[day]
-        print("Loaded.")
+        return
+    green, purple, yellow, monstercare, health, hunger, day = saves[chosen_day]
+    satonchair = data["satonchair"]
+    atefromcat = data["atefromcat"]
+    print("Loaded.")
+
+
 def restart():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health
+    global day, monstercare, saves
+
     saves = [None] * 11
     print("You restarted.")
+
     day = 1
     purple = 0
     green = 0
@@ -60,6 +87,7 @@ def restart():
     hunger = 0
     health = 100
     monstercare = 100
+
 
 def day6if3():
     global purple, green, yellow, hunger, health, day, monstercare, saves
@@ -377,8 +405,9 @@ def day2():
         if stealing1 == "cat":
             print("You stole a cat's food bowl. It striked you with lightning. Never mess with cats.")
             print("ENDING: CAT STRIKED")
-            #you dare to mess with God? no restart 4 u
+            #you dare to mess with God? no restart 4 u... or maybe?
             yellow += 100000000000000000000000000000000000000000
+            atefromcat = True
             exit()
         elif stealing1 == "neighbour":
             print("The neighbour caught you. You went to prison.")
@@ -446,6 +475,17 @@ def start():
     elif choice == "qwertyuiop":
         print("congrats a skip. you ate your keyboard and the shift button fell off thats why im typing in lowercase. h3v n0vv j can7 sL3ak! 0kav jm g3771ng vs3d 2 7h1s. 1dj07! J vv0n7 g1v3 v m3nv!\n3NDJNG: C0M3 0N! DVMBASS")
         day = 5
+        exit()
+    elif choice == "debug":
+        print(purple,
+            green,
+            yellow,
+            hunger,
+            health,
+            day,
+            monstercare,
+            satonchair,
+            atefromcat)
         exit()
     else:
         print("either youre trolling or stupid")
