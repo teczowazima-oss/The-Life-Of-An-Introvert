@@ -12,7 +12,7 @@ atefromcat = False
 saves = [None] * 11
 # purple is enasni, green is lamron, yellow is bmud
 def slrmenu():
-    print("You somehow had an ending. Now, you get the chance to restart.")
+    print("Hi for whatever reason you're here.")
     slr = input("{Restart}\t{Load}\t{Exit}\n")
     if slr == "Restart":
         restart()
@@ -111,7 +111,6 @@ def day6if3():
         pharmacy = input("{pharmacy}\t{try these}\n")
         if pharmacy == "pharmacy":
             print("That sounds scary. You really don't wanna do that... But you go against yourself and do it anyway. Every person you pass by looks at you weird.\nMaybe because you're wearing rags.")
-            save()
             buyrun1 = input("{go back}\t{buy anyway}\n")
             if buyrun1 == "go back":
                 print("You try to run back but a car runs you over. Then another. And another. Someone throws you some 40% vodka. You die of alcohol overdose(?).\nENDING: OVERDRUNK")
@@ -120,7 +119,6 @@ def day6if3():
                 print("You push through it and buy some cheap meds. You go back home and you take them. It turns out it was poison.")
                 time.sleep(5)
                 print("\nYou don't die because you're used to eating weird things anyway.\nYou did have salmonnella'd ice cream and an ice slab with paper in your fridge as your only food source, what did you expect?")
-                save()
         elif pharmacy == "try these":
             print("Really? How do I put this. You have... A hell of a good time. But the police come and arrest you. \nENDING: MAGICAL APAP")
             slrmenu()
@@ -152,9 +150,6 @@ def day6ify():
         drooled1 = input("{sit}\t{red bad}\n")
         if drooled1 == "sit":
             print("You sit on the chair and push a button. You feel tickles and your 1 braincell gets electrocuted, leaving you with 0.5.")
-            save()
-            time.sleep(5)
-            exit()
         elif drooled1 == "red bad":
             print("Apparently one thing in your mind stayed intact - fear of red. That decision unlocks the next level of evolution and you can read again. Mostly. You see a danger sign.\nIt was a good choice.")
     elif dumbass1 == "quote brainrots":
@@ -163,10 +158,6 @@ def day6ify():
         print("You have personally insulted me, the developer, and every being in this multiverse. You, filthy creature, you do not deserve having an electronic device anymore. Burn in hell.")
         print("You do not have enough dignity to witness the load reset exit menu. You little ipad kid timmy, your mommy should never give you her phone. You're not funny, nor cool. I could fry your stinky iphone right now.\nENDING: YOU DO NOT DESERVE TO ROAM THIS WORLD")
         exit()
-    elif dumbass1 == "try to run":
-        print("Like your braincells can do that(placeholder)")
-    elif dumbass1 == "think":
-        print("Really? Incredible.(placeholder")
 def day5():
     global purple, green, yellow, hunger, health, day, monstercare, saves
     print("Day 5... Congrats on getting through yesterday. I'm guessing it's not your first attempt. It got pretty dark, didn't it? Well. Since no one wanted more days, I'll make them.")
@@ -179,14 +170,14 @@ def day5():
         if ihnifana1 == "GRR":
             yellow += 3
             print("YoU snArLeD aT thEm! They decide it's best to send you back to grandma. She welcomed you and had to restrain you in the basement, but still fed you cookies and tea.")
-            save()
             day6ify()
+            save()
         elif ihnifana1 == "im not that dumb":
             green += 1
             yellow -= 1
             print("'th@at 1Iis a R3elief.' The monsters calmed down a little, but were still a bit worried about you. And scared of you...\nThey still kick you out. There's no way they are gonna let you stay.")
-            save()
             day6ify()
+            save()
         elif ihnifana1 == "SQUIRREL":
             print("the hell you want from me? im not gonna rap if that's what you want. what do you want from the dev? can a person even be ginger without comments like- ah you're here for the rabies.\nok. i uh may have been carried away. heres your rabid ending i guess\nENDING: RABIES")
             slrmenu()
@@ -195,29 +186,28 @@ def day5():
             exit()
     elif monstercare == 4 or purple > 7 and yellow < 6:
         print("Your friends care. They will let you go, but won't force you to do anything. You're one of them.")
-        save()
         day += 1
+        save()
     elif monstercare == 2:
         print("The monsters want you here forever. You're too important to let out! You are funny, cool, and their bestie! The outside is too dangerous.")
-        save()
         day6if2()
         day += 1
+        save()
     elif monstercare == 3 or (green > 4 and purple <= 4):
         print("'You should go... We want you to feel good.' The monsters look genuinely concerned. It's the first time they spoke like a human. I think they're trying to be as human as they can for you. Do you leave?")
         staygo3 = input("{stay}\t{go}\n")
         if staygo3 == "stay":
             print("Not an option. You get forced out of the paralell universe into your house and you realise your fridge is empty again.")
             print("You noticed the apples you buy often go missing. It's weird. Anyway, you just T-Pose the whole day since i have no idea for this line.")
-            save()
             day6if3()
             day += 1
+            save()
         elif staygo3 == "go":
             print("They wave their oozy hands and you leave. The only problem is, you're kind of in a sort of void.\nWhat do you do?\n")
             sdw = input("{struggle}\t{stay still}\t{wiggle}\n")
             if sdw == "struggle":
                 green += 1
                 print("The void didn't really care. Nothing happens.")
-                save()
     elif monstercare == 1:
         print("The monsters are neutral. They will let you choose whether you go or stay.")
     elif monstercare == 0:
@@ -527,6 +517,8 @@ def start():
     else:
         print("either youre trolling or stupid")
         exit()
+
+slrmenu()
 
 while True:
     if day == 1:
