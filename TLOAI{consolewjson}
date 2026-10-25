@@ -11,6 +11,20 @@ satonchair = False
 atefromcat = False
 saves = [None] * 11
 # purple is enasni, green is lamron, yellow is bmud
+
+def load_flags():
+    global satonchair, atefromcat
+
+    try:
+        with open("save.json", "r") as file:
+            data = json.load(file)
+
+        satonchair = data.get("satonchair", False)
+        atefromcat = data.get("atefromcat", False)
+
+    except FileNotFoundError:
+        pass
+
 def slrmenu():
     print("Hi for whatever reason you're here.")
     slr = input("{Restart}\t{Load}\t{Exit}\n")
@@ -21,11 +35,19 @@ def slrmenu():
     elif slr == "Exit":
         print("Very well.\nENDING: COULDN'T TAKE THE PRESSURE")
         exit()
+    elif slr == "1254wwweQQddMROW":
+        tru1r3st()
+        save()
+        exit()
     else:
         print("I literally gave you easier choices and you're still messing around. I made a save menu for you and you don't care? Fine! I won't stop the program! Sit here in uncomfortable silence.")
-
+        for i in range(60):
+            time.sleep(1)
+            print("...")
+        print("UGH FINE!")
+        
 def save():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
 
     saves[day] = [
         green, purple, yellow,
@@ -88,7 +110,8 @@ def restart():
     health = 100
     monstercare = 100
 
-def relrest():
+def tru1r3st():
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     purple = 0
     green = 0
     yellow = 0
@@ -101,9 +124,121 @@ def relrest():
     saves = [None] * 11
     save()
 
+#YELLOW ROUTE START#--------------------------------------------
+
+def day2Ylw():
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
+    print("The first day go go go don't stay.\nYou wakey to brokie being.\n")
+    choice2 = input("{na shopee}\t{no nomz}\t{GET NOMZ}\n")
+    if choice2 == "na shopee":
+        print("You go shop. You get things. You arrest be. ENDING: NEIGHBO- STOLE")
+        print("You bought 2 apples, some ramen and a bun.")
+        day += 1
+        if hunger > 10:
+            print("You need to eat something. What will you eat?")
+            choice3 = input("{the apples}\t{ramen}\t{the bun}\n")
+            if choice3 == "the apples":
+                hunger -= 4
+                print("It was good, but you're still a little hungry.")
+                save()
+            elif choice3 == "ramen":
+                hunger -= 8
+                print("That hit the spot.")
+                save()
+            elif choice3 == "the bun":
+                hunger -= 5
+                print("Tasted decent.")
+                save()
+    elif choice2 == "starve":
+        print("You are starving.\n")
+        starving1 = input("{eat}\t{don't eat}\n")
+        if starving1 == "eat":
+            print("You ate something. You spent the whole day lying in your bed, exhausted.")
+            day += 1
+            purple += 1
+            save()
+        elif starving1 == "don't eat":
+            print("You starved.")
+            print("ENDING: STARVED")
+            hunger += 100
+            slrmenu()
+        else:
+            print("stop trolling/being a dumbass")
+            exit()
+    elif choice2 == "steal food":
+        print("From where?")
+        yellow += 1
+        stealing1 = input("{neighbour}\t{grandma}\t{cat}\n")
+        if stealing1 == "cat":
+            print("You stole a cat's food bowl. It striked you with lightning. Never mess with cats.")
+            print("ENDING: CAT STRIKED")
+            #you dare to mess with God? no restart 4 u... or maybe?
+            atefromcat = True
+            save()
+            yellow += 100000000000000000000000000000000000000000000000000000000
+            exit()
+        elif stealing1 == "neighbour":
+            print("The neighbour caught you. You went to prison.")
+            print("ENDING: PRISON a")
+            slrmenu()
+        elif stealing1 == "grandma":
+            print("You are evil. Grandma fed you anyway and insisted you stay for tea.")
+            day += 1
+            hunger -= 2
+            save()
+        else:
+            print("pfft. you shouldve stolen")
+            exit()
+    else:
+        print("no cheating today")
+        exit()
+
+def startYlw():
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
+    print("Your smell smell wakey you because trash close to sleepy place. You last clean many times ago.")
+    print("You not care, you ignore this for nom noms.")
+    print("Inside, you find 2 year cold nom noms.")
+    print("The other nom nom is cold but 14 freez and not freez.")
+    print("You choose nom...")
+    choice = input("{cold nom}\t{freez nom}\n")
+    if choice == "cold nom":
+        print("Yo")
+    elif choice == "freez nom":
+        print("You ate the freez freez.")
+        print("It taste freez. The paper was gud.\nDay bye bye you eating because.")
+        yellow += 2
+        hunger -= 1
+        day += 1
+        save()
+    elif choice == "table":
+        print("Woodie tasty nom. aR3 y0000-u ther3333333333- *action_blocked*")
+        day += 1
+        green += 1
+        hunger -= 1
+        save()
+    elif choice == "qwertyuiop":
+        print("Uh uh uh, nope. Also, are you happy everything is dumbified? I hope so, I'm in pain because of this.")
+        day = 5
+        exit()
+    elif choice == "debug":
+        print(purple,
+            green,
+            yellow,
+            hunger,
+            health,
+            day,
+            monstercare,
+            satonchair,
+            atefromcat)
+        exit()
+    else:
+        print("either youre trolling or stupid- Eh. I think we know the answer, don't we?")
+        exit()
+
+#YELLOW ROUTE END#-------------------------------------------------------------------------------------u ate the cold nom."
 
 def day6if3():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("You wake up the next day. You slept a lot better. You realise your only roommates ate your earlier roommate and realise how bad all this looks. You get a headache.")
     headache = input("{take a pill}\t{sleep it off}\t{ignore it}\n")
     if headache == "take a pill":
@@ -133,16 +268,21 @@ def day6if3():
     else:
         print("nope")
         exit()
+        
 def day6if0():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("The monsters are still trying to kill you.")
+    
 def day6if1():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("The monsters see you but don't really care.")
+    
 def day6if2():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("The monsters are obsessed!")
+    
 def day6ify():
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("You wake up after an unidentified amount of time. The basement is dimly lit. The cookies had a weird aftertaste and you fell asleep almost instantly after eating them.\nYou decide it's just the sugar teen love thing. The narrator can't take your idiotism and cuts in: Are you such a moron that you don't know what sugar... ugh.\nYou don't really know what that was about. Anyway, you keep on eating the cookies.\nYour brain the size of a peanut that's basically polished to perfection manages to get the 1.5 braincells working and gives you an idea.")
     dumbass1 = input("{drool}\t{quote brainrots}\t{try to run}\t{think}\n")
     if dumbass1 == "drool":
@@ -150,16 +290,24 @@ def day6ify():
         drooled1 = input("{sit}\t{red bad}\n")
         if drooled1 == "sit":
             print("You sit on the chair and push a button. You feel tickles and your 1 braincell gets electrocuted, leaving you with 0.5.")
+            satonchair = True
+            yellow += 10
+            day == 1
+            save()
+            time.sleep(10)
+            exit()
         elif drooled1 == "red bad":
             print("Apparently one thing in your mind stayed intact - fear of red. That decision unlocks the next level of evolution and you can read again. Mostly. You see a danger sign.\nIt was a good choice.")
     elif dumbass1 == "quote brainrots":
         for i in range(500):
-            print("burn in hell.")
+            print("burn in helllllllllll.")
         print("You have personally insulted me, the developer, and every being in this multiverse. You, filthy creature, you do not deserve having an electronic device anymore. Burn in hell.")
         print("You do not have enough dignity to witness the load reset exit menu. You little ipad kid timmy, your mommy should never give you her phone. You're not funny, nor cool. I could fry your stinky iphone right now.\nENDING: YOU DO NOT DESERVE TO ROAM THIS WORLD")
+        time.sleep(20)
         exit()
+        
 def day5():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("Day 5... Congrats on getting through yesterday. I'm guessing it's not your first attempt. It got pretty dark, didn't it? Well. Since no one wanted more days, I'll make them.")
     # This one will make you feel weird because it will be super goofy! So you will feel like something bad's gonna come!") - originally a print, but decided better not to
     print("You are at your house. Or something similiar to it. Anyway, you're in a place very similiar to your house.")
@@ -216,7 +364,7 @@ def day5():
         print("CONGRATULATIONS! YOU GOT THE IMPOSSIBLE BUG ROUTE! for getting here i will reward you with a q&a. oops you clipped into the backrooms bye ending seeker. also youre here because you made the most plain character ever\n3ND1NG: B@CKR00MS")
         restart()
 def day4():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("It's day 4. You woke up back at your house. You probably sleepwalked.")
     if purple < 5:
         print("The monsters are upset with you.")
@@ -313,7 +461,7 @@ def day4():
                 slrmenu()
 
 def day3():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("You had a dream today. You don't remember it though.\nYour room stinks of a dead body. You decide to check...")
     choice4 = input("{the wardrobe}\t{under the bed}\t{HELL NAH}\n")
     if choice4 == "the wardrobe":
@@ -385,7 +533,7 @@ def day3():
         
 
 def day2():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("The first day passes.\nYou wake up to the familiar feeling of being broke.\nYou should go shopping today.\n")
     choice2 = input("{go shopping}\t{starve}\t{steal food}\n")
     if choice2 == "go shopping":
@@ -453,7 +601,7 @@ def day2():
         exit()
 
 def start():
-    global purple, green, yellow, hunger, health, day, monstercare, saves
+    global purple, green, yellow, hunger, health, day, monstercare, saves, satonchair, atefromcat
     print("You wake up to the smell of the trash next to your bed. You haven't cleaned your room since 1885.")
     print("As per usual, you ignore this to go downstairs and check your fridge for food.")
     print("Inside, you find a note from your mom that's been sitting there for 2 years. It's a block of ice.")
@@ -517,12 +665,15 @@ def start():
     else:
         print("either youre trolling or stupid")
         exit()
-
+load_flags()
 slrmenu()
 
 while True:
     if day == 1:
-        start()
+        if satonchair == True:
+            startYlw()
+        else:
+            start()
     elif day == 2:
         day2()
     elif day == 3:
